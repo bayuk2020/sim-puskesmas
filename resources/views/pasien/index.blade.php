@@ -7,9 +7,10 @@
   <div class="card-header d-flex justify-content-between align-items-center">
     <h5 class="card-title mb-0">Daftar Pasien</h5>
     <div>
-        <a href="{{ route('pasien.create') }}" class="btn btn-primary btn-sm">
-            <i class="fa-solid fa-user-plus me-1"></i> Tambah Pasien
-        </a>
+        <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modalPasien">
+          <i class="fa-solid fa-user-plus me-1"></i> Tambah Pasien
+        </button>
+
         <a href="{{ route('pasien.export') }}" class="btn btn-success btn-sm">
             <i class="fa-solid fa-file-excel me-1"></i> Export Excel
         </a>
@@ -89,6 +90,57 @@
           @endforelse
         </tbody>
       </table>
+      <!-- Modal Tambah/Edit Pasien -->
+      <div class="modal fade" id="modalPasien" tabindex="-1" aria-labelledby="modalPasienLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+          <div class="modal-content border-0 shadow-lg">
+            <div class="modal-header bg-primary text-white">
+              <h5 class="modal-title" id="modalPasienLabel">Tambah Data Pasien</h5>
+              <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form id="formPasien" action="{{ route('pasien.store') }}" method="POST">
+                @csrf
+                <div class="row g-3">
+                  <div class="col-md-6">
+                    <label class="form-label">NIK</label>
+                    <input type="text" name="nik" class="form-control" required>
+
+                    <label class="form-label mt-2">Nama Pasien</label>
+                    <input type="text" name="nama_pasien" class="form-control" required>
+
+                    <label class="form-label mt-2">Jenis Kelamin</label>
+                    <select name="jenis_kelamin" class="form-select" required>
+                      <option value="">-- Pilih --</option>
+                      <option value="L">Laki-laki</option>
+                      <option value="P">Perempuan</option>
+                    </select>
+
+                    <label class="form-label mt-2">Tanggal Lahir</label>
+                    <input type="date" name="tanggal_lahir" class="form-control">
+                  </div>
+
+                  <div class="col-md-6">
+                    <label class="form-label">Alamat</label>
+                    <textarea name="alamat" class="form-control" rows="3"></textarea>
+
+                    <label class="form-label mt-2">No HP</label>
+                    <input type="text" name="no_hp" class="form-control">
+
+                    <label class="form-label mt-2">Pekerjaan</label>
+                    <input type="text" name="pekerjaan" class="form-control">
+                  </div>
+                </div>
+                <div class="mt-3 text-end">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                  <button type="submit" class="btn btn-primary"><i class="fa-solid fa-save me-1"></i> Simpan</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
 
     <div class="mt-3">

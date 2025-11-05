@@ -17,6 +17,7 @@
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
 
 
+	<link href="{{ asset('assets/adminkit/css/bootstrap.min.css') }}" rel="stylesheet">
 	<link href="{{ asset('assets/adminkit/css/app.css') }}" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('assets/fontawesome/css/all.min.css') }}">
@@ -75,6 +76,7 @@
     </div>
 
 	<script src="{{ asset('assets/adminkit/js/app.js') }}"></script>
+	<script src="{{ asset('assets/adminkit/js/bootstrap.bundle.min.js') }}"></script>
 	
 	<!-- Notyf JS -->
 	<script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
