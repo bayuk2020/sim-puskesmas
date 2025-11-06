@@ -74,7 +74,22 @@
               <td>{{ Str::limit($p->alamat, 30) }}</td>
               <td>{{ $p->no_hp }}</td>
               <td class="text-center">
-                <a href="{{ route('pasien.show', $p->id_pasien) }}" class="btn btn-info btn-sm"><i class="fa-solid fa-eye"></i></a>
+                {{-- Modal Show --}}
+                <button class="btn btn-info btn-sm btnShow" 
+                        data-norm="{{ $p->no_rm }}"
+                        data-nama="{{ $p->nama_pasien }}"
+                        data-nik="{{ $p->nik }}"
+                        data-jk="{{ $p->jenis_kelamin }}"
+                        data-tmplahir="{{ $p->tempat_lahir }}"
+                        data-tglahir="{{ $p->tanggal_lahir }}"
+                        data-alamat="{{ $p->alamat }}"
+                        data-nohp="{{ $p->no_hp }}"
+                        data-pekerjaan="{{ $p->pekerjaan }}"
+                        data-status="{{ $p->status_perkawinan }}"
+                        data-bs-toggle="modal" data-bs-target="#modalShow">
+                  <i class="fa-solid fa-eye"></i>
+                </button>
+                {{-- Modal Edit --}}
                 <button class="btn btn-warning btn-sm btnEdit" 
                         data-id="{{ $p->id_pasien }}" 
                         data-nama="{{ $p->nama_pasien }}" 
@@ -152,6 +167,61 @@
           </div>
         </div>
       </div>
+      {{-- End Modal Edit --}}
+
+      <!-- Modal Detail Pasien -->
+      <div class="modal fade" id="modalShow" tabindex="-1" aria-labelledby="modalShowLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+          <div class="modal-content border-0 shadow-lg">
+            <div class="modal-header bg-info text-white">
+              <h5 class="modal-title" id="modalShowLabel"><i class="fa-solid fa-user"></i> Detail Pasien</h5>
+              <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table table-borderless mb-0">
+                <tr>
+                  <th width="30%">No RM</th><td id="show_no_rm"></td>
+                </tr>
+                <tr>
+                  <th>NIK</th><td id="show_nik"></td>
+                </tr>
+                <tr>
+                  <th>Nama Pasien</th><td id="show_nama"></td>
+                </tr>
+                <tr>
+                  <th>Jenis Kelamin</th><td id="show_jk"></td>
+                </tr>
+                <tr>
+                  <th>Tempat, Tanggal Lahir</th><td id="show_ttl"></td>
+                </tr>
+                <tr>
+                  <th>Alamat</th><td id="show_alamat"></td>
+                </tr>
+                <tr>
+                  <th>No HP</th><td id="show_nohp"></td>
+                </tr>
+                <tr>
+                  <th>Pekerjaan</th><td id="show_pekerjaan"></td>
+                </tr>
+                <tr>
+                  <th>Status Perkawinan</th><td id="show_status"></td>
+                </tr>
+              </table>
+            </div>
+            <div class="modal-footer">
+              <a href="{{ route('pasien.kartu', $p->id_pasien ?? 0) }}" 
+                class="btn btn-outline-info"
+                id="btnCetakKartu" target="_blank">
+                <i class="fa-solid fa-id-card-clip me-1"></i> Cetak Kartu
+              </a>
+
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      {{-- End Modal Show Pasien --}}
+
 
     </div>
 
@@ -195,7 +265,43 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 });
+document.addEventListener('DOMContentLoaded', function () {
+  const modalShow = document.getElementById('modalShow');
+
+  modalShow.addEventListener('show.bs.modal', function (e) {
+    const btn = e.relatedTarget;
+
+    document.getElementById('show_no_rm').textContent = btn.dataset.norm || '-';
+    document.getElementById('show_nik').textContent = btn.dataset.nik || '-';
+    document.getElementById('show_nama').textContent = btn.dataset.nama || '-';
+    document.getElementById('show_jk').textContent = btn.dataset.jk === 'L' ? 'Laki-laki' : 'Perempuan';
+    document.getElementById('show_ttl').textContent = 
+        (btn.dataset.tmplahir || '-') + ', ' + (btn.dataset.tglahir || '-');
+    document.getElementById('show_alamat').textContent = btn.dataset.alamat || '-';
+    document.getElementById('show_nohp').textContent = btn.dataset.nohp || '-';
+    document.getElementById('show_pekerjaan').textContent = btn.dataset.pekerjaan || '-';
+    document.getElementById('show_status').textContent = btn.dataset.status || '-';
+  });
+});
 </script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const modalShow = document.getElementById('modalShow');
+  const btnCetak = document.getElementById('btnCetakKartu');
+
+  modalShow.addEventListener('show.bs.modal', function (e) {
+    const btn = e.relatedTarget;
+
+    // asumsikan di tombol show ada data-id
+    const id = btn.dataset.id || btn.getAttribute('data-id');
+    if (id && btnCetak) {
+      btnCetak.href = '/pasien/' + id + '/kartu';
+    }
+  });
+});
+</script>
+
+
 
 
 @endsection

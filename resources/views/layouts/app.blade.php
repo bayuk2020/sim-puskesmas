@@ -21,7 +21,17 @@
 	<link href="{{ asset('assets/adminkit/css/app.css') }}" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('assets/fontawesome/css/all.min.css') }}">
-
+	<style>
+	#modalShow th {
+		color: #6c757d;
+		font-weight: 600;
+		width: 35%;
+	}
+	#modalShow td {
+		font-weight: 500;
+		color: #212529;
+	}
+	</style>
 </head>
 
 

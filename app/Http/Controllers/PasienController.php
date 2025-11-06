@@ -6,6 +6,7 @@ use App\Models\Pasien;
 use Illuminate\Http\Request;
 use App\Exports\PasienExport;
 use Maatwebsite\Excel\Facades\Excel;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class PasienController extends Controller
 {
@@ -103,4 +104,22 @@ class PasienController extends Controller
     {
         return Excel::download(new PasienExport, 'data-pasien.xlsx');
     }
+    public function kartu($id)
+{
+    $pasien = Pasien::findOrFail($id);
+
+    // (opsional) hitung umur untuk ditampilkan
+    $umur = null;
+    if (!empty($pasien->tanggal_lahir)) {
+        $umur = \Carbon\Carbon::parse($pasien->tanggal_lahir)->age;
+    }
+
+    $pdf = Pdf::loadView('pasien.kartu', [
+        'pasien' => $pasien,
+        'umur' => $umur,
+    ])->setPaper('A7', 'landscape'); // A7 landscape
+
+    // stream di tab baru (atau ->download('Kartu_'.$pasien->no_rm.'.pdf'))
+    return $pdf->stream('Kartu_Pasien_'.$pasien->no_rm.'.pdf');
+}
 }
