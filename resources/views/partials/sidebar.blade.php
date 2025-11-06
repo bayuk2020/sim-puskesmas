@@ -23,33 +23,36 @@
         </a>
       </li>
 
-      <li class="sidebar-item {{ request()->is('pegawai*') ? 'active' : '' }}">
-        <a class="sidebar-link" href="/dashboard">
-          <i class="fa-solid fa-user-doctor me-2"></i>
-          <span class="align-middle">Pegawai</span>
-        </a>
-      </li>
+      <li class="sidebar-item">
+    <a class="sidebar-link" href="{{ route('pegawai.index') }}">
+        <i class="fa fa-users"></i> Pegawai
+    </a>
+</li>
+
 
       <li class="sidebar-item {{ request()->is('poli*') ? 'active' : '' }}">
-        <a class="sidebar-link" href="/dashboard">
-          <i class="fa-solid fa-hospital-user me-2"></i>
-          <span class="align-middle">Poli</span>
-        </a>
-      </li>
+  <a class="sidebar-link" href="{{ route('poli.index') }}">
+    <i class="fa-solid fa-hospital-user me-2"></i>
+    <span class="align-middle">Poli</span>
+  </a>
+</li>
+
 
       <li class="sidebar-item {{ request()->is('obat*') ? 'active' : '' }}">
-        <a class="sidebar-link" href="/dashboard">
-          <i class="fa-solid fa-capsules me-2"></i>
-          <span class="align-middle">Obat</span>
-        </a>
-      </li>
+  <a class="sidebar-link" href="{{ route('obat.index') }}">
+    <i class="fa-solid fa-capsules me-2"></i>
+    <span class="align-middle">Obat</span>
+  </a>
+</li>
+
 
       <li class="sidebar-item {{ request()->is('tindakan*') ? 'active' : '' }}">
-        <a class="sidebar-link" href="/dashboard">
-          <i class="fa-solid fa-syringe me-2"></i>
-          <span class="align-middle">Tindakan</span>
-        </a>
-      </li>
+  <a class="sidebar-link" href="{{ route('tindakan.index') }}">
+    <i class="fa-solid fa-stethoscope me-2"></i>
+    <span class="align-middle">Tindakan</span>
+  </a>
+</li>
+
 
       <li class="sidebar-header">Pelayanan</li>
 
@@ -92,3 +95,5 @@
     </ul>
   </div>
 </nav>
+
+
