@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use SimpleSoftwareIO\QrCode\Generator;
 use SimpleSoftwareIO\QrCode\Driver\GdDriver;
+use Illuminate\Support\Facades\Gate;
 
 
 class AppServiceProvider extends ServiceProvider
@@ -27,6 +28,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        Gate::define('manage-visits', fn($u) => in_array($u->role, ['Admin','Perawat','Dokter']));
+        Gate::define('manage-prescriptions', fn($u) => in_array($u->role, ['Admin','Dokter','Farmasi']));
+        Gate::define('manage-payments', fn($u) => in_array($u->role, ['Admin','Kasir']));
     }
 }

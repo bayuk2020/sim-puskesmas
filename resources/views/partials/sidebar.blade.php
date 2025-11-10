@@ -25,7 +25,7 @@
 
       <li class="sidebar-item">
     <a class="sidebar-link" href="{{ route('pegawai.index') }}">
-        <i class="fa fa-users"></i> Pegawai
+        <i class="fa fa-users"></i>Pegawai
     </a>
 </li>
 

@@ -3,6 +3,13 @@
 
 <head>
 	<meta charset="utf-8">
+
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    <title>{{ config('app.name', 'Laravel') }}</title>
+
+	
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<meta name="description" content="Responsive Admin &amp; Dashboard Template based on Bootstrap 5">
@@ -31,6 +38,8 @@
 		font-weight: 500;
 		color: #212529;
 	}
+	.navbar, .navbar .dropdown-menu { z-index: 2000; }
+
 	</style>
 </head>
 
@@ -86,8 +95,8 @@
     </div>
 
 	<script src="{{ asset('assets/adminkit/js/app.js') }}"></script>
-	<script src="{{ asset('assets/adminkit/js/bootstrap.bundle.min.js') }}"></script>
-	
+	<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+	<script> window.feather && feather.replace(); </script>
 	<!-- Notyf JS -->
 	<script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
 

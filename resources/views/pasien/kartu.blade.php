@@ -91,6 +91,8 @@
         @php
             $qrImage = base64_encode(QrCode::format('png')->size(70)->generate($pasien->no_rm));
         @endphp
+        <img src="data:image/png;base64,{{ $qrBase64 }}" width="70" height="70" alt="QR Code">
+
         <img src="data:image/png;base64,{{ $qrImage }}" width="70" height="70" alt="QR Code">
 
       </div>

@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 use App\Exports\PasienExport;
 use Maatwebsite\Excel\Facades\Excel;
 use Barryvdh\DomPDF\Facade\Pdf;
+use BaconQrCode\Writer;
+use BaconQrCode\Renderer\ImageRenderer;
+use BaconQrCode\Renderer\RendererStyle\RendererStyle;
+use BaconQrCode\Renderer\Image\GdImageBackEnd;
 
 class PasienController extends Controller
 {
@@ -107,19 +111,23 @@ class PasienController extends Controller
     public function kartu($id)
 {
     $pasien = Pasien::findOrFail($id);
+    $umur = $pasien->tanggal_lahir ? \Carbon\Carbon::parse($pasien->tanggal_lahir)->age : null;
 
-    // (opsional) hitung umur untuk ditampilkan
-    $umur = null;
-    if (!empty($pasien->tanggal_lahir)) {
-        $umur = \Carbon\Carbon::parse($pasien->tanggal_lahir)->age;
-    }
+    // === QR PNG via GD (tanpa Imagick) ===
+    $renderer = new ImageRenderer(
+        new RendererStyle(140),           // pixel size keseluruhan (atur sesuka)
+        new GdImageBackEnd()              // <-- pakai GD, bukan Imagick
+    );
+    $writer = new Writer($renderer);
+    $qrBinary = $writer->writeString($pasien->no_rm);     // isi QR; bisa diganti url('/pasien/'.$pasien->id_pasien)
+    $qrBase64 = base64_encode($qrBinary);
 
-    $pdf = Pdf::loadView('pasien.kartu', [
-        'pasien' => $pasien,
-        'umur' => $umur,
-    ])->setPaper('A7', 'landscape'); // A7 landscape
+    $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('pasien.kartu', [
+        'pasien'  => $pasien,
+        'umur'    => $umur,
+        'qrBase64'=> $qrBase64,          // kirim ke blade
+    ])->setPaper('A7', 'landscape');
 
-    // stream di tab baru (atau ->download('Kartu_'.$pasien->no_rm.'.pdf'))
     return $pdf->stream('Kartu_Pasien_'.$pasien->no_rm.'.pdf');
 }
 }
