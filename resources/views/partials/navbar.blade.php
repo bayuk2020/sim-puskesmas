@@ -26,17 +26,17 @@
       @auth
         {{-- Menu modul utama - atur sesuai role kalau perlu --}}
         <li class="nav-item">
-          <a class="nav-link {{ nav_active(['visits.*']) }}" href="{{ route('visits.index') }}">
+          <a class="nav-link {{ nav_active(['visits.*']) }}" href="{{ route('visits.index') }}"> 
             <i class="align-middle me-1" data-feather="calendar"></i> Kunjungan
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link {{ nav_active(['prescriptions.*']) }}" href="{{ route('prescriptions.index') }}">
+          {{-- <a class="nav-link {{ nav_active(['prescriptions.*']) }}" href="{{ route('prescriptions.index') }}"> --}}
             <i class="align-middle me-1" data-feather="file-text"></i> Resep
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link {{ nav_active(['payments.*']) }}" href="{{ route('payments.index') }}">
+          {{-- <a class="nav-link {{ nav_active(['payments.*']) }}" href="{{ route('payments.index') }}"> --}}
             <i class="align-middle me-1" data-feather="credit-card"></i> Pembayaran
           </a>
         </li>
@@ -46,17 +46,17 @@
             <i class="align-middle me-1" data-feather="bar-chart-2"></i> Laporan
           </a>
           <ul class="dropdown-menu" aria-labelledby="reportDropdown">
-            <li><a class="dropdown-item" href="{{ route('reports.daily') }}">Rekap Harian</a></li>
+            {{-- <li><a class="dropdown-item" href="{{ route('reports.daily') }}">Rekap Harian</a></li>
             <li><a class="dropdown-item" href="{{ route('reports.monthly') }}">Rekap Bulanan</a></li>
             <li><a class="dropdown-item" href="{{ route('reports.doctor') }}">Per Dokter</a></li>
-            <li><a class="dropdown-item" href="{{ route('reports.poli') }}">Per Poli</a></li>
+            <li><a class="dropdown-item" href="{{ route('reports.poli') }}">Per Poli</a></li> --}}
           </ul>
         </li>
-        <li class="nav-item">
+        {{-- <li class="nav-item">
           <a class="nav-link {{ nav_active(['settings.*']) }}" href="{{ route('settings.index') }}">
             <i class="align-middle me-1" data-feather="settings"></i> Pengaturan
           </a>
-        </li>
+        </li> --}}
       @endauth
     </ul>
 
@@ -87,7 +87,7 @@
           </a>
           <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
             <li><h6 class="dropdown-header">{{ Auth::user()->email }}</h6></li>
-            <li><a class="dropdown-item" href="{{ route('profile.show') }}">
+            {{-- <li><a class="dropdown-item" href="{{ route('profile.show') }}"> --}}
               <i class="align-middle me-1" data-feather="user"></i> Profil
             </a></li>
             <li><a class="dropdown-item" href="{{ route('password.request') }}">

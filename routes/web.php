@@ -7,8 +7,6 @@ use App\Http\Controllers\PoliController;
 use App\Http\Controllers\ObatController;
 use App\Http\Controllers\TindakanController;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\VisitController;
-use App\Http\Controllers\PrescriptionsController;
 
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\PasienExport;
@@ -16,24 +14,7 @@ use App\Exports\PasienExport;
 
 Route::middleware('auth')->group(function () {
   Route::get('/dashboard', fn() => view('dashboard'))->name('dashboard');
-   Route::get('/kunjungan', [VisitController::class, 'index'])->name('visits.index');
-   Route::get('/kunjungan', [PrescriptionsController::class, 'index'])->name('prescriptions.index');
-  // Contoh proteksi per modul:
-//   Route::middleware('can:manage-visits')->group(function () {
-//     Route::resource('visits', VisitController::class);
-//   });
-
-//   Route::middleware('can:manage-prescriptions')->group(function () {
-//     Route::resource('prescriptions', PrescriptionController::class)->only(['show','store','destroy']);
-//   });
-
-//   Route::middleware('can:manage-payments')->group(function () {
-//     Route::get('visits/{visit}/payment', [PaymentController::class,'prepare'])->name('payments.create');
-//     Route::post('visits/{visit}/pay', [PaymentController::class,'pay'])->name('payments.pay');
-//     Route::get('visits/{visit}/receipt', [PaymentController::class,'receipt'])->name('payments.receipt');
-//   });
-
-  // reports, settings, dsb…
+  
 });
 
 
