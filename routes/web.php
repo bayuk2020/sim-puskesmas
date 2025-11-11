@@ -6,7 +6,11 @@ use App\Http\Controllers\PegawaiController;
 use App\Http\Controllers\PoliController;
 use App\Http\Controllers\ObatController;
 use App\Http\Controllers\TindakanController;
+use App\Http\Controllers\VisitController;
+use App\Http\Controllers\ReportController;
+use App\Http\Controllers\SettingsController;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\RekamMedisController;
 
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\PasienExport;
@@ -14,6 +18,16 @@ use App\Exports\PasienExport;
 
 Route::middleware('auth')->group(function () {
   Route::get('/dashboard', fn() => view('dashboard'))->name('dashboard');
+ Route::get('/visits', [VisitController::class, 'index'])->name('visits.index');
+   Route::get('/reports/daily', [ReportController::class, 'daily'])->name('reports.daily');
+    Route::get('/reports/monthly', [ReportController::class, 'monthly'])->name('reports.monthly');
+    Route::get('/reports/doctor', [ReportController::class, 'doctor'])->name('reports.doctor');
+    Route::get('/reports/poli', [ReportController::class, 'poli'])->name('reports.poli');
+     Route::get('/settings', [SettingsController::class, 'index'])->name('settings.index');
+     Route::get('/rekammedis/create/{visit}', [RekamMedisController::class, 'create'])
+    ->name('rekammedis.create');
+    Route::post('/rekammedis/store/{visit}', [RekamMedisController::class, 'store'])
+    ->name('rekammedis.store');
   
 });
 
