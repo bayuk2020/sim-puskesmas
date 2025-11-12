@@ -26,7 +26,8 @@
       @auth
         {{-- Menu modul utama - atur sesuai role kalau perlu --}}
         <li class="nav-item">
-          <a class="nav-link {{ nav_active(['visits.*']) }}" href="{{ route('visits.index') }}"> 
+          {{-- <a class="nav-link {{ nav_active(['visits.*']) }}" href="{{ route('visits.index') }}">  --}}
+          <a class="nav-link {{ nav_active(['visits.*']) }}" href="#"> 
             <i class="align-middle me-1" data-feather="calendar"></i> Kunjungan
           </a>
         </li>
