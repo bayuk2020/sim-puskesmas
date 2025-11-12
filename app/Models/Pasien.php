@@ -14,6 +14,9 @@ class Pasien extends Model
         'tanggal_lahir' => 'date',
         'tanggal_daftar' => 'datetime'
     ];
-    public function kunjungan() { return $this->hasMany(Kunjungan::class,'id_pasien'); }
-    
+
+    public function kunjungan()
+    {
+        return $this->hasMany(Visit::class, 'id_pasien', 'id_pasien');
+    }
 }
