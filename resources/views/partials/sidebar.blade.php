@@ -83,23 +83,23 @@
   </a>
   <ul class="collapse list-unstyled {{ request()->routeIs('reports.*') ? 'show' : '' }}" id="reportsMenu">
     <li>
-      <a class="sidebar-link ms-4 {{ request()->routeIs('reports.daily') ? 'active' : '' }}" href="{{ route('reports.daily') }}">Rekap Harian</a>
+      <a class="sidebar-link ms-4 {{ request()->routeIs('reports.daily') ? 'active' : '' }}" href="#">Rekap Harian</a>
     </li>
     <li>
-      <a class="sidebar-link ms-4 {{ request()->routeIs('reports.monthly') ? 'active' : '' }}" href="{{ route('reports.monthly') }}">Rekap Bulanan</a>
+      <a class="sidebar-link ms-4 {{ request()->routeIs('reports.monthly') ? 'active' : '' }}" href="#">Rekap Bulanan</a>
     </li>
     <li>
-      <a class="sidebar-link ms-4 {{ request()->routeIs('reports.doctor') ? 'active' : '' }}" href="{{ route('reports.doctor') }}">Per Dokter</a>
+      <a class="sidebar-link ms-4 {{ request()->routeIs('reports.doctor') ? 'active' : '' }}" href="#">Per Dokter</a>
     </li>
     <li>
-      <a class="sidebar-link ms-4 {{ request()->routeIs('reports.poli') ? 'active' : '' }}" href="{{ route('reports.poli') }}">Per Poli</a>
+      <a class="sidebar-link ms-4 {{ request()->routeIs('reports.poli') ? 'active' : '' }}" href="#">Per Poli</a>
     </li>
   </ul>
 </li>
 
 
       <li class="sidebar-item {{ request()->routeIs('settings.*') ? 'active' : '' }}">
-        <a class="sidebar-link" href="{{ route('settings.index') }}">
+        <a class="sidebar-link" href="#">
           <i class="fa-solid fa-gear me-2"></i>
           <span class="align-middle">Pengaturan</span>
         </a>

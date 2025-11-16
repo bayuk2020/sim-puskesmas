@@ -8,15 +8,33 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('visits', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('id_pasien')->constrained('pasien', 'id_pasien')->onDelete('cascade');
-            $table->foreignId('id_poli')->constrained('poli', 'id_poli')->onDelete('cascade');
-            $table->date('visit_date');
-            $table->text('keluhan')->nullable();
-            $table->text('diagnosa')->nullable();
-            $table->string('tindakan')->nullable();
-            $table->timestamps();
+        Schema::create('visits', function (Blueprint $t) {
+            $t->id(); // id incremental default Laravel
+            $t->string('no_visit')->unique();
+            
+            // sesuaikan dengan primary key pasien: id_pasien
+            $t->unsignedBigInteger('id_pasien');
+            $t->unsignedBigInteger('poli_id')->nullable();
+
+            // refer ke pegawai: id_pegawai
+            $t->unsignedBigInteger('id_pegawai')->nullable();
+
+            $t->string('no_antrian')->nullable();
+
+            // gunakan nilai enum yang konsisten dan default salah satu value
+            $t->enum('status', ['menunggu', 'in_consult', 'selesai', 'batal'])
+              ->default('menunggu');
+
+            $t->json('vitals')->nullable();
+            $t->text('diagnosis')->nullable();
+            $t->date('tanggal_kunjungan')->nullable();
+
+            $t->timestamps();
+
+            // foreign keys (explicit karena PK bukan "id")
+            $t->foreign('id_pasien')->references('id_pasien')->on('pasien')->cascadeOnDelete();
+            $t->foreign('id_pegawai')->references('id_pegawai')->on('pegawai')->nullOnDelete();
+            $t->foreign('poli_id')->references('id')->on('poli')->nullOnDelete();
         });
     }
 

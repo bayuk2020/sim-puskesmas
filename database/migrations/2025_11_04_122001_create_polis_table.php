@@ -9,13 +9,12 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
-    {
-        Schema::create('poli', function (Blueprint $t) {
-            $t->id('id_poli');
-            $t->string('nama_poli', 100);
-            $t->text('keterangan')->nullable();
-            $t->timestamps();
+    public function up(): void {
+        Schema::create('poli', function (Blueprint $table) {
+            $table->id();
+            $table->string('nama_poli', 100);
+            $table->text('keterangan')->nullable();
+            $table->timestamps();
         });
     }
 

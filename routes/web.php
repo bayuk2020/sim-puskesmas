@@ -18,7 +18,13 @@ use App\Exports\PasienExport;
 
 Route::middleware('auth')->group(function () {
   Route::get('/dashboard', fn() => view('dashboard'))->name('dashboard');
- Route::get('/visits', [VisitController::class, 'index'])->name('visits.index');
+ // Visits
+    Route::get('/visits', [VisitController::class, 'index'])->name('visits.index');
+    Route::get('/visits/search', [VisitController::class, 'search'])->name('visits.search');
+    Route::get('/visits/create/{patient}', [VisitController::class, 'create'])->name('visits.create');
+    Route::post('/visits', [VisitController::class, 'store'])->name('visits.store');
+
+
    Route::get('/reports/daily', [ReportController::class, 'daily'])->name('reports.daily');
     Route::get('/reports/monthly', [ReportController::class, 'monthly'])->name('reports.monthly');
     Route::get('/reports/doctor', [ReportController::class, 'doctor'])->name('reports.doctor');
@@ -28,8 +34,20 @@ Route::middleware('auth')->group(function () {
     ->name('rekammedis.create');
     Route::post('/rekammedis/store/{visit}', [RekamMedisController::class, 'store'])
     ->name('rekammedis.store');
-  
 });
+
+// Route::middleware(['auth'])->group(function(){
+//     // halaman pencarian & hasil
+//     Route::get('visits','VisitController@index')->name('visits.index');
+//     Route::get('visits/search','VisitController@search')->name('visits.search');
+
+//     // buka form pendaftaran untuk pasien tertentu
+//     Route::get('visits/create/{patient}','VisitController@create')->name('visits.create');
+
+//     // simpan kunjungan
+//     Route::post('visits','VisitController@store')->name('visits.store');
+// });
+
 
 
 Route::get('/', function () {

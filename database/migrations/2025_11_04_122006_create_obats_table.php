@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('obat', function (Blueprint $t) {
             $t->id('id_obat');
             $t->string('kode_obat', 20)->unique();
+            $t->string('barcode', 20)->unique();
             $t->string('nama_obat', 100);
             $t->string('satuan', 20)->nullable();
             $t->integer('stok')->default(0);

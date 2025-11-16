@@ -7,11 +7,15 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class Visit extends Model
 {
-    protected $fillable = ['id_pasien', 'id_poli', 'visit_date', 'keluhan', 'diagnosa', 'tindakan'];
+    protected $fillable = [
+        'no_visit','patient_id','poli_id','staff_id','no_antrian',
+        'status','vitals','diagnosis','visit_date'
+    ];
 
     // Cast visit_date ke Carbon
     protected $casts = [
-        'visit_date' => 'datetime',
+        'vitals' => 'array',
+        'visit_date' => 'date'
     ];
 
     public function pasien()
@@ -23,4 +27,6 @@ class Visit extends Model
     {
         return $this->belongsTo(Poli::class, 'id_poli', 'id_poli');
     }
+    
+    public function pegawai(){ return $this->belongsTo(Pegawai::class,'id_pegawai'); }
 }
