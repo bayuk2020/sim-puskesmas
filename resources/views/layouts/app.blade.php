@@ -68,13 +68,9 @@
 
 						@if (session('success'))
 							notyf.success('{{ session('success') }}');
-						@endif
-
-						@if (session('error'))
+						@elseif(session('error'))
 							notyf.error('{{ session('error') }}');
-						@endif
-
-						@if (session('info'))
+						@elseif(session('info'))
 							notyf.open({
 								type: 'info',
 								message: '{{ session('info') }}',

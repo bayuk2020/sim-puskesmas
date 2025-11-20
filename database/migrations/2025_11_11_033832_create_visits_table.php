@@ -14,7 +14,7 @@ return new class extends Migration
             
             // sesuaikan dengan primary key pasien: id_pasien
             $t->unsignedBigInteger('id_pasien');
-            $t->unsignedBigInteger('poli_id')->nullable();
+            $t->unsignedBigInteger('id_poli')->nullable();
 
             // refer ke pegawai: id_pegawai
             $t->unsignedBigInteger('id_pegawai')->nullable();
@@ -34,7 +34,7 @@ return new class extends Migration
             // foreign keys (explicit karena PK bukan "id")
             $t->foreign('id_pasien')->references('id_pasien')->on('pasien')->cascadeOnDelete();
             $t->foreign('id_pegawai')->references('id_pegawai')->on('pegawai')->nullOnDelete();
-            $t->foreign('poli_id')->references('id')->on('poli')->nullOnDelete();
+            $t->foreign('id_poli')->references('id')->on('poli')->nullOnDelete();
         });
     }
 

@@ -44,7 +44,7 @@
                 <div class="list-group list-group-flush">
                     <a href="{{ route('visits.index') }}" class="list-group-item list-group-item-action active">Cari Pasien</a>
                     <a href="#" class="list-group-item list-group-item-action">Online</a>
-                    <a href="#" class="list-group-item list-group-item-action">Antrian</a>
+                    <a href="{{ route('visits.antrian') }}" class="list-group-item list-group-item-action">Antrian</a>
                 </div>
             </div>
         </div>

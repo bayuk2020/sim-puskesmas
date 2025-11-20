@@ -43,13 +43,13 @@
               @endforeach
             </select>
           </div>
-
+          {{-- @dd($polis) --}}
           <div class="col-md-4">
             <label class="form-label">Poli</label>
-            <select name="poli_id" class="form-control">
+            <select name="id_poli" class="form-control">
               <option value="">-- pilih poli --</option>
               @foreach($polis as $pol)
-                <option value="{{ $pol->id_poli }}">{{ $pol->nama_poli }}</option>
+                <option value="{{ $pol->id }}">{{ $pol->nama_poli }}</option>
               @endforeach
             </select>
           </div>

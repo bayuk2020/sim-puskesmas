@@ -13,6 +13,7 @@
         "laravel/tinker": "^2.9",
         "laravel/ui": "^4.6",
         "maatwebsite/excel": "4.x-dev",
+        "rap2hpoutre/laravel-log-viewer": "^2.5",
         "simplesoftwareio/simple-qrcode": "^4.2"
     },
     "require-dev": {

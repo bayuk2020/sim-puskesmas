@@ -18,6 +18,8 @@ Route::redirect('/', '/login');
 
 Auth::routes();
 
+Route::get('logs', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'index'])->middleware('auth');
+
 
 Route::middleware('auth')->group(function () {
 
@@ -28,6 +30,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/visits/create/{patient}', [VisitController::class, 'create'])->name('visits.create');
     Route::post('/visits', [VisitController::class, 'store'])->name('visits.store');
     Route::get('/visits/search-json', [VisitController::class, 'searchJson'])->name('visits.search-json');
+
+    // Antrian
+    Route::get('/antrian', [VisitController::class, 'antrian'])->name('visits.antrian');
 
     // Laporan
     Route::get('/reports/daily', [ReportController::class, 'daily'])->name('reports.daily');
