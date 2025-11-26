@@ -43,7 +43,6 @@
                 <div class="card-header fw-bold text-center">KUNJUNGAN</div>
                 <div class="list-group list-group-flush">
                     <a href="{{ route('visits.index') }}" class="list-group-item list-group-item-action active">Cari Pasien</a>
-                    <a href="#" class="list-group-item list-group-item-action">Online</a>
                     <a href="{{ route('visits.antrian') }}" class="list-group-item list-group-item-action">Antrian</a>
                 </div>
             </div>
@@ -57,8 +56,7 @@
                 <div class="card-header fw-bold">Pendaftaran Kunjungan Pasien</div>
                 <div class="card-body">
 
-                    <h5 class="mb-3">Pencarian Pasien</h5>
-
+                    
                     <form action="{{ route('visits.index') }}" method="get" class="row g-3">
 
                         @php $f = $filters ?? []; @endphp

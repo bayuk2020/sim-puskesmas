@@ -21,7 +21,7 @@ return new class extends Migration
             $t->foreign('id_pasien')->references('id_pasien')->on('pasien')
             ->cascadeOnUpdate()->restrictOnDelete();
 
-            $t->foreign('id_poli')->references('id')->on('poli')
+            $t->foreign('id_poli')->references('id_poli')->on('poli')
             ->cascadeOnUpdate()->restrictOnDelete();
 
             $t->foreign('id_pegawai')->references('id_pegawai')->on('pegawai')

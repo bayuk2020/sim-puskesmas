@@ -12,14 +12,12 @@ use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\RekamMedisController;
 use Illuminate\Support\Facades\Auth;
 
-
 Route::redirect('/', '/login');
-
 
 Auth::routes();
 
-Route::get('logs', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'index'])->middleware('auth');
-
+Route::get('logs', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'index'])
+    ->middleware('auth');
 
 Route::middleware('auth')->group(function () {
 
@@ -31,8 +29,12 @@ Route::middleware('auth')->group(function () {
     Route::post('/visits', [VisitController::class, 'store'])->name('visits.store');
     Route::get('/visits/search-json', [VisitController::class, 'searchJson'])->name('visits.search-json');
 
-    // Antrian
+    // Halaman Antrian
     Route::get('/antrian', [VisitController::class, 'antrian'])->name('visits.antrian');
+
+    // AJAX Next Queue
+    Route::get('/poli/{id_poli}/nextQueue', [VisitController::class, 'nextAntrian'])
+        ->name('poli.nextQueue');
 
     // Laporan
     Route::get('/reports/daily', [ReportController::class, 'daily'])->name('reports.daily');
@@ -59,10 +61,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('tindakan', TindakanController::class);
 });
 
-// Home route default Laravel
+// Default
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 // phpinfo
-Route::get('/phpinfo', function() {
-    phpinfo();
-});
+Route::get('/phpinfo', fn() => phpinfo());

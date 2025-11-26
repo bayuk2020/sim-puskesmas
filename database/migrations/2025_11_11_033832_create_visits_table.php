@@ -34,7 +34,7 @@ return new class extends Migration
             // foreign keys (explicit karena PK bukan "id")
             $t->foreign('id_pasien')->references('id_pasien')->on('pasien')->cascadeOnDelete();
             $t->foreign('id_pegawai')->references('id_pegawai')->on('pegawai')->nullOnDelete();
-            $t->foreign('id_poli')->references('id')->on('poli')->nullOnDelete();
+            $t->foreign('id_poli')->references('id_poli')->on('poli')->nullOnDelete();
         });
     }
 

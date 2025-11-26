@@ -12,16 +12,8 @@ class PoliController extends Controller
      */
     public function index()
     {
-        $poli = Poli::orderBy('created_at', 'desc')->get();
+        $poli = Poli::orderBy('id_poli', 'asc')->get();
         return view('poli.index', compact('poli'));
-    }
-
-    /**
-     * Tampilkan form tambah poli.
-     */
-    public function create()
-    {
-        return view('poli.create');
     }
 
     /**
@@ -30,13 +22,15 @@ class PoliController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nama_poli' => 'required|string|max:100',
-            'keterangan' => 'nullable|string',
+            'kode_poli'   => 'required|string|max:10|unique:poli,kode_poli',
+            'nama_poli'   => 'required|string|max:100',
+            'keterangan'  => 'nullable|string',
         ]);
 
         Poli::create([
-            'nama_poli' => $request->nama_poli,
-            'keterangan' => $request->keterangan,
+            'kode_poli'   => $request->kode_poli,
+            'nama_poli'   => $request->nama_poli,
+            'keterangan'  => $request->keterangan,
         ]);
 
         return redirect()->route('poli.index')->with('success', 'Data Poli berhasil ditambahkan!');
@@ -56,15 +50,18 @@ class PoliController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $poli = Poli::findOrFail($id);
+
         $request->validate([
-            'nama_poli' => 'required|string|max:100',
-            'keterangan' => 'nullable|string',
+            'kode_poli'   => 'required|string|max:10|unique:poli,kode_poli,' . $poli->id_poli . ',id_poli',
+            'nama_poli'   => 'required|string|max:100',
+            'keterangan'  => 'nullable|string',
         ]);
 
-        $poli = Poli::findOrFail($id);
         $poli->update([
-            'nama_poli' => $request->nama_poli,
-            'keterangan' => $request->keterangan,
+            'kode_poli'   => $request->kode_poli,
+            'nama_poli'   => $request->nama_poli,
+            'keterangan'  => $request->keterangan,
         ]);
 
         return redirect()->route('poli.index')->with('success', 'Data Poli berhasil diperbarui!');

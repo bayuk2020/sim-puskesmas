@@ -11,9 +11,10 @@ return new class extends Migration
      */
     public function up(): void {
         Schema::create('poli', function (Blueprint $table) {
-            $table->id();
+            $table->id('id_poli');
             $table->string('nama_poli', 100);
             $table->text('keterangan')->nullable();
+            $table->string('kode_poli', 5)->nullable();
             $table->timestamps();
         });
     }
